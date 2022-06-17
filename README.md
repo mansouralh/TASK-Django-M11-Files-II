@@ -64,3 +64,52 @@ Time to purchase some islands!
 10. Add some CSS and prettify your list of island!
 11. Commit your code.
 12. Push your code.
+
+### Media Files w/ Forms
+
+1. Add a `forms.py` inside of `islands`.
+2. Add a model form for `Island` called `IslandForm`, and include the `name` field.
+3. Add a `photos` attribute above `class Meta` that will be a `FileField` with multiple uploads allowed ([look here](https://docs.djangoproject.com/en/4.0/topics/http/file-uploads/#uploading-multiple-files) for more info).
+4. Add `photos` to the list of fields inside of `IslandForm`.
+5. Add a `create_island` view and add it to our `urls.py`.
+   - The view should render the form for now in a template called `create_island.html`
+6. Add the `create_island.html` template inside of `islands/templates`.
+7. Make sure to wrap it `form` tag like so:
+
+   ```html
+   <form
+     action="{% url 'create-ship' %}"
+     method="POST"
+     enctype="multipart/form-data"
+   >
+     ...
+   </form>
+   ```
+
+   - Again, `enctype` is what will allow us to deal with user-uploaded files
+
+8. Update our view so that we are handling the file upload:
+
+   ```python
+   def create_island(request: HttpRequest) -> HttpResponse:
+       form = IslandForm()
+       if request.method == "POST":
+           form = IslandForm(request.POST, request.FILES)
+           if form.is_valid():
+               form.save()
+               return redirect("island-list")
+       context = {
+           "form": form,
+       }
+       return render(request, "create_island.html", context)
+   ```
+
+9. The code above will not work, because the island model does not have `photos` as an attribute (in fact a lot of it will need to change).
+10. You will need to create the island first separately.
+11. Then iterate over the `request.FILES` and create `IslandPhoto`s.
+12. Test out the form and commit your changes.
+13. Push your code.
+
+#### Media Files w/ Forms Bonus
+
+Instead of creating an `IslandPhoto` on each iteration, accumulate all the `IslandPhoto`s that will be created and bulk create them. [This link](https://docs.djangoproject.com/en/4.0/ref/models/querysets/#bulk-create) should help you out.
