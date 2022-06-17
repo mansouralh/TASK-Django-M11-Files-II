@@ -78,7 +78,7 @@ Time to purchase some islands!
 
    ```html
    <form
-     action="{% url 'create-ship' %}"
+     action="{% url 'create-island' %}"
      method="POST"
      enctype="multipart/form-data"
    >
