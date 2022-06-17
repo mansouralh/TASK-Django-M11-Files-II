@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from islands import models
+
+to_register = [
+    models.IslandPhoto,
+    models.Island,
+]
+
+admin.site.register(to_register)

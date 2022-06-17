@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from islands import views as island_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("islands/", island_views.get_islands, name="island-list"),
 ]

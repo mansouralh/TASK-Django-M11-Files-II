@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ships</title>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>Islands</h1>
+        {% if islands %}
+        <section>
+          {% for island in islands %}
+          <div>
+            <h2>{{ island.name }} Photos</h2>
+            {% for photo in island.photos.all %}
+            <img src="" alt="{{ island.name }}" />
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </section>
+        {% else %}
+        <p>No islands yet.</p>
+        {% endif %}
+      </article>
+    </main>
+  </body>
+</html>
