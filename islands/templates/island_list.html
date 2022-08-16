@@ -1,13 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
     <title>Ships</title>
   </head>
   <body>
     <main>
+      <div class="container" >
       <article>
         <h1>Islands</h1>
         {% if islands %}
@@ -16,7 +19,7 @@
           <div>
             <h2>{{ island.name }} Photos</h2>
             {% for photo in island.photos.all %}
-            <img src="" alt="{{ island.name }}" />
+            <img src="{{ photo.image.url }}" alt="{{ island.name }}" width="500px"/>
             {% endfor %}
           </div>
           {% endfor %}
@@ -25,6 +28,7 @@
         <p>No islands yet.</p>
         {% endif %}
       </article>
+    </div>
     </main>
   </body>
 </html>
